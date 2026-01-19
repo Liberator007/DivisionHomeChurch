@@ -18,23 +18,27 @@ body {
 }
 
 .left {
-    background: #e8f4ff;
+    background: #f8f5fb;
 }
 
 .right {
-    background: #ffecec;
+    background: #fef8f5;
 }
 
 /* Разделитель */
 .divider {
-    width: 12px;
-    background: repeating-linear-gradient(
+    width: 3px;
+    background: linear-gradient(
         to bottom,
-        #000,
-        #000 12px,
-        transparent 12px,
-        transparent 24px
+        transparent 0%,
+        #c9b8e4 20%,
+        #c9b8e4 50%,
+        #e6c4b0 50%,
+        #e6c4b0 80%,
+        transparent 100%
     );
+    box-shadow: 0 0 8px rgba(201, 184, 228, 0.2), 0 0 12px rgba(230, 196, 176, 0.2);
+    margin: 0 4.5px;
 }
 
 .leader img {
@@ -54,8 +58,8 @@ body {
     margin-top: 30px;
     display: flex;
     justify-content: center;
-    gap: 25px; /* горизонтальный отступ */
-    row-gap: 40px; /* вертикальный отступ между строками */
+    gap: 40px; /* горизонтальный отступ */
+    row-gap: 45px; /* вертикальный отступ между строками */
     flex-wrap: wrap; /* чтобы кружки переносились */
 }
 
@@ -66,36 +70,49 @@ body {
 }
 
 .circle {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
     background: #cfcfcf;
     border-radius: 50%;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
     background-size: cover;
     background-position: center;
+    position: relative;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.08),
+        0 6px 16px rgba(0,0,0,0.15),
+        0 0 0 8px rgba(255,255,255,0.6),
+        inset 0 1px 2px rgba(255,255,255,0.8);
 }
 
 .circle:hover {
-    transform: scale(1.1);
+    transform: scale(1.12);
+    filter: brightness(1.05);
 }
 
 .member-name {
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 14px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #a89bb3;
     text-align: center;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
 
     /* фиксируем высоту под две строки */
     height: 32px; /* можно увеличить до 36–40px */
     line-height: 16px; /* высота строки */
 }
 
-
-.member:hover {
-    transform: scale(1.1);
+.member:hover .member-name {
+    color: #6b5d7a;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    letter-spacing: 0.5px;
 }
+
+
+
 
 /* Модальное окно */
 .modal {
