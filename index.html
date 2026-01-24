@@ -1,98 +1,622 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Home church</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-
-    <!-- Левая сторона -->
-    <div class="side left">
-        <div class="leader">
-            <img src="photo/vlad/vlad_laikov.jpg" alt="">
-            <h2>Влад Лайков</h2>
-        </div>
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HolyHome - Christian Community</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .title-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .left-section {
+      background: linear-gradient(135deg, #f3e7ff 0%, #e8d5ff 30%, #fce4ec 70%, #fff0f5 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .left-section::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -30%;
+      width: 160%;
+      height: 160%;
+      background: radial-gradient(circle, rgba(197, 139, 255, 0.08) 0%, transparent 60%);
+      animation: gentleFloat 25s ease-in-out infinite;
+    }
+    
+    .right-section {
+      background: linear-gradient(135deg, #e3f2fd 0%, #dce9ff 30%, #ffe8d6 70%, #fff5e6 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .right-section::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -30%;
+      width: 160%;
+      height: 160%;
+      background: radial-gradient(circle, rgba(144, 202, 249, 0.08) 0%, transparent 60%);
+      animation: gentleFloat 25s ease-in-out infinite reverse;
+    }
+    
+    @keyframes gentleFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(2%, -2%) rotate(1deg); }
+      50% { transform: translate(-1%, 2%) rotate(-1deg); }
+      75% { transform: translate(-2%, -1%) rotate(0.5deg); }
+    }
+    
+    .divider {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, 
+        transparent 0%,
+        rgba(230, 190, 138, 0.3) 10%,
+        rgba(230, 190, 138, 0.5) 50%,
+        rgba(230, 190, 138, 0.3) 90%,
+        transparent 100%);
+      box-shadow: 0 0 20px rgba(230, 190, 138, 0.2);
+      z-index: 10;
+    }
+    
+    .divider::before {
+      content: '\2728';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
+      animation: gentleGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes gentleGlow {
+      0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .leader-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(230, 190, 138, 0.2);
+      object-fit: cover;
+      transition: all 0.4s ease;
+      animation: fadeInUp 0.8s ease-out;
+      background: white;
+    }
+    
+    .leader-photo:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12), 0 6px 24px rgba(230, 190, 138, 0.3);
+    }
+    
+    .member-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .member-circle:not(.revealed):hover {
+      transform: translateY(-6px) scale(1.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(230, 190, 138, 0.25);
+      border-color: rgba(230, 190, 138, 0.8);
+    }
+    
+    .member-circle.revealed {
+      border-color: rgba(230, 190, 138, 0.6);
+      box-shadow: 0 4px 20px rgba(230, 190, 138, 0.2), 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .member-circle.revealed:hover {
+      transform: scale(1.05) translateY(-4px) !important;
+      border-color: rgba(230, 190, 138, 0.8);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12), 0 6px 24px rgba(230, 190, 138, 0.3) !important;
+    }
+    
+    .member-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .member-circle.revealed img {
+      opacity: 1;
+    }
+    
+    .question-mark {
+      font-size: 2rem;
+      color: #c4b5d5;
+      font-weight: 600;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    
+    .member-circle:not(.revealed):hover .question-mark {
+      color: #b89fd0;
+      animation: shake 0.3s ease-in-out infinite;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+      10% { transform: translate(-46%, -48%) rotate(-8deg); }
+      30% { transform: translate(-54%, -52%) rotate(8deg); }
+      50% { transform: translate(-48%, -50%) rotate(-6deg); }
+      70% { transform: translate(-52%, -50%) rotate(6deg); }
+      90% { transform: translate(-50%, -48%) rotate(-4deg); }
+    }
+    
+    .member-name {
+      font-size: 0.8rem;
+      color: #5d4e6d;
+      text-align: center;
+      margin-top: 8px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+      max-width: 90px;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    
+    .member-name.visible {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+    
+    .leader-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+      border: 2px solid white;
+    }
+    
+    .group-label {
+      color: #8b7ba8;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-top: 12px;
+      opacity: 0.85;
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    
+    .modal-content {
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 32px;
+      padding: 48px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08);
+      position: relative;
+      border: 1px solid rgba(230, 190, 138, 0.2);
+      min-width: 320px;
+    }
+    
+    .modal-overlay.active .modal-content {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    
+    @keyframes softRipple {
+      0% {
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 0 rgba(230, 190, 138, 0.4);
+      }
+      50% {
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 30px rgba(230, 190, 138, 0);
+      }
+      100% {
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 30px rgba(230, 190, 138, 0);
+      }
+    }
+    
+    .modal-content.ripple-effect {
+      animation: softRipple 1.2s ease-out;
+    }
+    
+    .modal-image-container {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid rgba(230, 190, 138, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      background: white;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-question {
+      font-size: 4rem;
+      color: #c4b5d5;
+      font-weight: 600;
+      position: absolute;
+      transition: opacity 0.4s ease;
+    }
+    
+    .modal-question.hidden {
+      opacity: 0;
+    }
+    
+    .modal-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    
+    .modal-photo.visible {
+      opacity: 1;
+    }
+    
+    .modal-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #5d4e6d;
+      margin-top: 24px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    
+    .modal-name.visible {
+      opacity: 1;
+    }
+    
+    .close-hint {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #8b7ba8;
+      opacity: 0.7;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app" class="w-full h-full flex relative"><!-- Left Home Group -->
+   <div class="left-section w-1/2 h-full flex flex-col items-center justify-start py-12 px-6 relative"><!-- Leader -->
+    <div class="flex flex-col items-center mb-10 relative z-10">
+     <div class="relative"><img src="photo/vlad/vlad.jpg" alt="Leader" class="leader-photo" loading="lazy">
+      <div class="leader-badge">
+       ✝️
+      </div>
+     </div>
+     <h2 id="left-leader-name" class="text-2xl font-bold mt-5" style="color: #6b4f8a;">Влад Лайков</h2><span class="text-base" style="color: #9b7bb5; font-weight: 500;">Лидер</span>
+     <p id="left-group-name" class="group-label">HolyHome</p>
+    </div><!-- Team Members -->
+    <div id="left-members" class="flex flex-wrap justify-center gap-5 relative z-10" style="max-width: 90%;"></div>
+   </div><!-- Divider -->
+   <div class="divider"></div><!-- Title at top center -->
+   <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-center pt-8">
+    <h1 id="site-title" class="title-font text-5xl font-bold tracking-wide" style="
+        background: linear-gradient(135deg, #d4a574 0%, #e6be8a 50%, #f5d9a8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 8px rgba(230, 190, 138, 0.25));
+        letter-spacing: 0.05em;
+      ">HolyHome</h1>
+   </div><!-- Right Home Group -->
+   <div class="right-section w-1/2 h-full flex flex-col items-center justify-start py-12 px-6 relative"><!-- Leader -->
+    <div class="flex flex-col items-center mb-10 relative z-10">
+     <div class="relative"><img src="photo/egor/egor.jpg" alt="Leader" class="leader-photo" loading="lazy">
+      <div class="leader-badge">
+       ✝️
+      </div>
+     </div>
+     <h2 id="right-leader-name" class="text-2xl font-bold mt-5" style="color: #4a6b8a;">Егор Шкляревский</h2><span class="text-base" style="color: #6b8ba5; font-weight: 500;">Лидер</span>
+     <p id="right-group-name" class="group-label">HolyHome</p>
+    </div><!-- Team Members -->
+    <div id="right-members" class="flex flex-wrap justify-center gap-5 relative z-10" style="max-width: 90%;"></div>
+   </div>
+  </div><!-- Modal -->
+  <div id="modal" class="modal-overlay">
+   <div class="modal-content">
+    <div class="modal-image-container">
+     <div id="modal-question" class="modal-question">
+      ?
+     </div><img id="modal-photo" src="" alt="" class="modal-photo" loading="lazy">
+    </div>
+    <h3 id="modal-name" class="modal-name"></h3>
+    <p class="close-hint">Click anywhere to close</p>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      site_title: "HolyHome",
+      left_leader_name: "Влад Лайков",
+      left_group_name: "HolyHome",
+      right_leader_name: "Егор Шкляревский",
+      right_group_name: "HolyHome v2.0"
+    };
+    
+    let config = { ...defaultConfig };
+    
+    // Team members data
+    const leftTeam = [
+      { name: "Тимофей Данильченко", seed: "photo/vlad/timaD.jpg" },
+      { name: "Алёна Данильченко", seed: "photo/vlad/alena.jpg" },
+      { name: "Кристина Курган", seed: "photo/vlad/kristina.jpg" },
+      { name: "Яна Койпыш", seed: "photo/vlad/yana.jpg" },
+      { name: "Даниил Колядич", seed: "photo/vlad/danikK.jpg" },
+      { name: "Дарья Лайкова", seed: "photo/vlad/dasha.jpg" },
+      { name: "Мария Лайкова", seed: "photo/vlad/mariya.jpg" },
+      { name: "Денис Лесковец", seed: "photo/vlad/denis.jpg" },
+      { name: "Оксана Лесковец", seed: "photo/vlad/oksana.jpg" },
+      { name: "Даниил Приходько", seed: "photo/vlad/danikP.jpg" },
+      { name: "Антон Салява", seed: "photo/vlad/anton.jpg" },
+      { name: "Виктория Сологуб", seed: "photo/vlad/vika.jpg" },
+      { name: "Владислав Стасевич", seed: "photo/vlad/vladS.jpg" },
+      { name: "Егор Гончаронок", seed: "photo/vlad/egor.jpg" },
+      { name: "Дарья Гудель", seed: "photo/vlad/dashaG.jpg" },
+      { name: "Анжи Мбади", seed: "photo/vlad/anji.jpg" },
+      { name: "Полина Тимофеева", seed: "photo/vlad/polina.jpg" },
+    ];
+    
+    const rightTeam = [
+      { name: "Максим Гришалевич", seed: "photo/egor/maxim.jpg" },
+      { name: "Тимофей Бисюков", seed: "photo/egor/timaB.jpg" },
+      { name: "Марина Леонович", seed: "photo/egor/marina.jpg" },
+      { name: "Александр Корнейчук", seed: "photo/egor/sasha.jpg" },
+      { name: "Рената Мудрая", seed: "photo/egor/renata.jpg" },
+      { name: "Алексей Ширко", seed: "photo/egor/lesha.jpg" },
+      { name: "Илья Ангалевич", seed: "photo/egor/iliya.jpg" },
+      { name: "София Яковлева", seed: "photo/egor/sonya.jpg" },
+      { name: "Вероника Будник", seed: "photo/egor/veronika.jpg" },
+      { name: "Мария Зверко", seed: "photo/egor/masha.jpg" },
+      { name: "Юрий Иванов", seed: "photo/egor/yura.jpg" },
+      { name: "Дарья Пантюхова", seed: "photo/egor/dasha.jpg" },
+      { name: "Диана Шумская", seed: "photo/egor/diana.jpg" },
+      { name: "Ангелина Шудельская", seed: "photo/egor/angelina.jpg" },
+      { name: "Максим Шамич", seed: "photo/egor/maximSh.jpg" },
+      { name: "Данила Бондарик", seed: "photo/egor/danikB.jpg" },
+      { name: "Вадим Шамич", seed: "photo/egor/vadimSh.jpg" },
+    ];
+    
+    function createMemberElement(member, index, bgColor) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'flex flex-col items-center';
+      
+      const circle = document.createElement('div');
+      circle.className = 'member-circle';
+      circle.style.animationDelay = `${index * 0.1}s`;
+      circle.dataset.revealed = 'false';
+      
+      circle.innerHTML = `
+        <span class="question-mark">?</span>
+        <img src="${member.seed}" alt="${member.name}" loading="lazy">
+      `;
+      
+      const nameLabel = document.createElement('div');
+      nameLabel.className = 'member-name';
+      nameLabel.textContent = member.name;
+      
+      circle.addEventListener('click', (e) => {
+        showModal(member, bgColor, circle, nameLabel);
+      });
+      
+      wrapper.appendChild(circle);
+      wrapper.appendChild(nameLabel);
+      
+      return wrapper;
+    }
+    
+    function showModal(member, bgColor, circleElement, nameLabel) {
+      const modal = document.getElementById('modal');
+      const modalContent = modal.querySelector('.modal-content');
+      
+      // Close modal first if it's open
+      const wasActive = modal.classList.contains('active');
+      if (wasActive) {
+        modal.classList.remove('active');
         
-        <div class="members">
-            <div class="member">
-                <div class="circle" data-name="Дарья Лайкова" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Антон Салява" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Даник Колядич" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Иван Иванов" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Иван Иванов" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Иван Иванов" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Иван Иванов" data-img="photo/vlad/anton_saliava.jpg"></div>
-                <div class="member-name"></div>
-            </div>
+        // Wait for close animation, then recreate content
+        setTimeout(() => {
+          recreateModalContent(modal, modalContent, member, bgColor, circleElement, nameLabel);
+        }, 300);
+      } else {
+        recreateModalContent(modal, modalContent, member, bgColor, circleElement, nameLabel);
+      }
+    }
+    
+    function recreateModalContent(modal, modalContent, member, bgColor, circleElement, nameLabel) {
+      // Completely recreate the modal content with fresh elements
+      modalContent.innerHTML = `
+        <div class="modal-image-container">
+          <div class="modal-question">?</div>
+          <img src="${member.seed}" alt="${member.name}" class="modal-photo" loading="lazy">
         </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Правая сторона -->
-    <div class="side right">
-        <div class="leader">
-            <img src="egor.jpg" alt="">
-            <h2>Егор Шкляревский</h2>
-        </div>
-
-        <div class="members">
-            <div class="member">
-                <div class="circle" data-name="Иван Иванов" data-img="images/ivan.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Петя Петров" data-img="images/petya.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-
-            <div class="member">
-                <div class="circle" data-name="Саша Смирнов" data-img="images/sasha.jpg"></div>
-                <div class="member-name"></div>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Модальное окно -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <img id="modal-img">
-        <h2 id="modal-name"></h2>
-    </div>
-</div>
-
-
-<script src="script.js"></script>
-
-</body>
+        <h3 class="modal-name">${member.name}</h3>
+        <p class="close-hint">Click anywhere to close</p>
+      `;
+      
+      // Show modal
+      modal.classList.add('active');
+      
+      // Add ripple effect
+      modalContent.classList.remove('ripple-effect');
+      void modalContent.offsetWidth; // Force reflow
+      modalContent.classList.add('ripple-effect');
+      
+      // Get fresh references to newly created elements
+      const modalQuestion = modalContent.querySelector('.modal-question');
+      const modalPhoto = modalContent.querySelector('.modal-photo');
+      const modalName = modalContent.querySelector('.modal-name');
+      
+      // Reveal sequence
+      setTimeout(() => {
+        modalQuestion.classList.add('hidden');
+        modalPhoto.classList.add('visible');
+        modalName.classList.add('visible');
+        
+        // Update the circle on main screen
+        if (circleElement.dataset.revealed === 'false') {
+          circleElement.dataset.revealed = 'true';
+          circleElement.classList.add('revealed');
+          circleElement.querySelector('.question-mark').style.display = 'none';
+          const img = circleElement.querySelector('img');
+          img.style.opacity = '1';
+          nameLabel.classList.add('visible');
+        }
+      }, 1300);
+    }
+    
+    function hideModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+    
+    function renderTeams() {
+      const leftContainer = document.getElementById('left-members');
+      const rightContainer = document.getElementById('right-members');
+      
+      leftContainer.innerHTML = '';
+      rightContainer.innerHTML = '';
+      
+      leftTeam.forEach((member, index) => {
+        leftContainer.appendChild(createMemberElement(member, index, 'f3e7ff'));
+      });
+      
+      rightTeam.forEach((member, index) => {
+        rightContainer.appendChild(createMemberElement(member, index, 'e3f2fd'));
+      });
+    }
+    
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+      
+      document.getElementById('site-title').textContent = config.site_title;
+      document.getElementById('left-leader-name').textContent = config.left_leader_name;
+      document.getElementById('left-group-name').textContent = config.left_group_name;
+      document.getElementById('right-leader-name').textContent = config.right_leader_name;
+      document.getElementById('right-group-name').textContent = config.right_group_name;
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["site_title", config.site_title || defaultConfig.site_title],
+        ["left_leader_name", config.left_leader_name || defaultConfig.left_leader_name],
+        ["left_group_name", config.left_group_name || defaultConfig.left_group_name],
+        ["right_leader_name", config.right_leader_name || defaultConfig.right_leader_name],
+        ["right_group_name", config.right_group_name || defaultConfig.right_group_name]
+      ]);
+    }
+    
+    // Initialize
+    document.getElementById('modal').addEventListener('click', hideModal);
+    renderTeams();
+    
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    } else {
+      onConfigChange(defaultConfig);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c305b48f7b368ec',t:'MTc2OTI2NjM2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
