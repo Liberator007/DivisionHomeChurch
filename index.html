@@ -382,7 +382,7 @@
    </div><!-- Divider -->
    <div class="divider"></div><!-- Title at top center -->
    <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-center pt-8">
-    <h1 id="site-title" class="title-font text-5xl font-bold tracking-wide" style="
+    <h1 id="site-title" class="leading-tight title-font text-5xl font-bold tracking-wide" style="
         background: linear-gradient(135deg, #d4a574 0%, #e6be8a 50%, #f5d9a8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -427,43 +427,43 @@
     
     // Team members data
     const leftTeam = [
+      { name: "Мария Лайкова", seed: "photo/vlad/mariya.jpg" },
+      { name: "Виктория Сологуб", seed: "photo/vlad/vika.jpg" },
+      { name: "Денис Лесковец", seed: "photo/vlad/denis.jpg" },
+      { name: "Дарья Лайкова", seed: "photo/vlad/dasha.jpg" },
       { name: "Тимофей Данильченко", seed: "photo/vlad/timaD.jpg" },
+      { name: "Оксана Лесковец", seed: "photo/vlad/oksana.jpg" },
       { name: "Алёна Данильченко", seed: "photo/vlad/alena.jpg" },
+      { name: "Егор Гончаронок", seed: "photo/vlad/egor.jpg" },
+      { name: "Даниил Приходько", seed: "photo/vlad/danikP.jpg" },
       { name: "Кристина Курган", seed: "photo/vlad/kristina.jpg" },
       { name: "Яна Койпыш", seed: "photo/vlad/yana.jpg" },
-      { name: "Даниил Колядич", seed: "photo/vlad/danikK.jpg" },
-      { name: "Дарья Лайкова", seed: "photo/vlad/dasha.jpg" },
-      { name: "Мария Лайкова", seed: "photo/vlad/mariya.jpg" },
-      { name: "Денис Лесковец", seed: "photo/vlad/denis.jpg" },
-      { name: "Оксана Лесковец", seed: "photo/vlad/oksana.jpg" },
-      { name: "Даниил Приходько", seed: "photo/vlad/danikP.jpg" },
       { name: "Антон Салява", seed: "photo/vlad/anton.jpg" },
-      { name: "Виктория Сологуб", seed: "photo/vlad/vika.jpg" },
-      { name: "Владислав Стасевич", seed: "photo/vlad/vladS.jpg" },
-      { name: "Егор Гончаронок", seed: "photo/vlad/egor.jpg" },
-      { name: "Дарья Гудель", seed: "photo/vlad/dashaG.jpg" },
+      { name: "Даниил Колядич", seed: "photo/vlad/danikK.jpg" },
       { name: "Анжи Мбади", seed: "photo/vlad/anji.jpg" },
       { name: "Полина Тимофеева", seed: "photo/vlad/polina.jpg" },
+      { name: "Влад Стасевич", seed: "photo/vlad/vladS.jpg" },
+      { name: "Дарья Гудель", seed: "photo/vlad/dashaG.jpg" },
     ];
     
     const rightTeam = [
+      { name: "Алексей Ширко", seed: "photo/egor/lesha.jpg" },
+      { name: "Илья Ангалевич", seed: "photo/egor/iliya.jpg" },
       { name: "Максим Гришалевич", seed: "photo/egor/maxim.jpg" },
+      { name: "Диана Шумская", seed: "photo/egor/diana.jpg" },
+      { name: "Ангелина Шудельская", seed: "photo/egor/angelina.jpg" },
+      { name: "Вероника Будник", seed: "photo/egor/veronika.jpg" },
+      { name: "Мария Зверко", seed: "photo/egor/masha.jpg" },
+      { name: "Юрий Иванов", seed: "photo/egor/yura.jpg" },
+      { name: "Вадим Шамич", seed: "photo/egor/vadimSh.jpg" },
       { name: "Тимофей Бисюков", seed: "photo/egor/timaB.jpg" },
       { name: "Марина Леонович", seed: "photo/egor/marina.jpg" },
       { name: "Александр Корнейчук", seed: "photo/egor/sasha.jpg" },
       { name: "Рената Мудрая", seed: "photo/egor/renata.jpg" },
-      { name: "Алексей Ширко", seed: "photo/egor/lesha.jpg" },
-      { name: "Илья Ангалевич", seed: "photo/egor/iliya.jpg" },
       { name: "София Яковлева", seed: "photo/egor/sonya.jpg" },
-      { name: "Вероника Будник", seed: "photo/egor/veronika.jpg" },
-      { name: "Мария Зверко", seed: "photo/egor/masha.jpg" },
-      { name: "Юрий Иванов", seed: "photo/egor/yura.jpg" },
-      { name: "Дарья Пантюхова", seed: "photo/egor/dasha.jpg" },
-      { name: "Диана Шумская", seed: "photo/egor/diana.jpg" },
-      { name: "Ангелина Шудельская", seed: "photo/egor/angelina.jpg" },
-      { name: "Максим Шамич", seed: "photo/egor/maximSh.jpg" },
       { name: "Данила Бондарик", seed: "photo/egor/danikB.jpg" },
-      { name: "Вадим Шамич", seed: "photo/egor/vadimSh.jpg" },
+      { name: "Максим Шамич", seed: "photo/egor/maximSh.jpg" },
+      { name: "Дарья Пантюхова", seed: "photo/egor/dasha.jpg" },
     ];
     
     function createMemberElement(member, index, bgColor) {
